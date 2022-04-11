@@ -8,7 +8,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="00-BigONotation" />
         <module name="01-Arrays" />
+        <module name="02-Linked-Lists" />
+        <module name="06-Trees" />
+        <module name="03-Stacks" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="02-Linked Lists" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>
