@@ -136,6 +136,33 @@ public class MySinglyLinkedList {
                     current.next = null;
 
                 }
+                size--;
+                break;
+            }
+            previous = current;
+            current = current.next;
+        }
+    }
+
+    void myDeleteAllNode(int value) {
+        Node current = head;
+        Node previous = head;
+
+        if (isEmpty()) {
+            System.out.println("There is nothing to delete here");
+        }
+
+        while (current != null) {
+            if(current.value == value) {
+                if (current == head) {
+                    head = current.next;
+                } else if (current == tail) {
+                    tail = previous;
+                    tail.next = null;
+                } else {
+                    previous.next = current.next;
+                }
+                size--;
 
             }
             previous = current;
@@ -162,6 +189,9 @@ public class MySinglyLinkedList {
                     current.next = null;
                 }
                 size--;// decrease the size once you
+                prev = current;
+                current = current.next;
+                break;
             }
             prev = current;
             current = current.next;
@@ -252,6 +282,7 @@ public class MySinglyLinkedList {
         while (current != null) {
 
             Node curNext = current.next;
+
             while (curNext != null && curNext.value == current.value) {
                 curNext = curNext.next;
             }

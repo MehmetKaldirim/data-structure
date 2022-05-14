@@ -5,7 +5,7 @@ import SingleLinkedList.MySinglyLinkedList;
 public class LinkedListApp {
     public static void main(String[] args) {
         //int[] numbers={1,1,2,2,2,3,4,4,4,4,5,6,6};
-        int[] numbers={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+        int[] numbers={1,1,8,4,5,6,7,8,9,10,11,12,13,14,8};
 
         MySinglyLinkedList nums1 = new MySinglyLinkedList();
 
@@ -15,8 +15,9 @@ public class LinkedListApp {
 
         }
 
-        Node newHead =  nums1.stayMeRemoveN(nums1.head,6,1);
-        nums1.head = newHead;
+        nums1.myDeleteAllNode(8);
+        //Node newHead =  nums1.stayMeRemoveN(nums1.head,6,1);
+        //nums1.head = newHead;
         nums1.printNodes();
 
         /*nums1.myRemoveDuplication();

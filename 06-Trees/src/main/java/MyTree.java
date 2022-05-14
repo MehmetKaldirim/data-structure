@@ -214,43 +214,65 @@ public class MyTree {
             if(toVisit.rightChild!=null) queue.add(toVisit.rightChild);
         }// end while
     }// end levelOrder
+
     // task-1 implement contains method
     public boolean contains(int value){
         if (root==null) return false;
         Node current=root;
         while(current!=null){
-            if (value < current.value) current=current.leftChild;
-            else if (value > current.value) current=current.rightChild;
+            if (value < current.value) {
+                current = current.leftChild;
+
+            } else if (value > current.value) {
+                current = current.rightChild;
+            }
             else return true;
         }
         return false;
     }
-    public Node find(Node root, int value){
-        Node result = null;
-        if (root==null) return result;
-        Node current=root;
-        while(current!=null){
-            if (value < current.value) current=current.leftChild;
-            else if (value> current.value) current=current.rightChild;
-            else {
-                result = current;
-                break;
-            }
-        }
-       return result;
-    }
+
+
 
     // task -2 return if the node is a leaf
     public boolean isLeaf(Node node) {
         return node.leftChild==null && node.rightChild==null;
     }
+
+
     // task -3 print leaves of a BST
     public void printLeaves(Node root){
         if (root==null) return;
-        if (isLeaf(root)) System.out.print(root.value+", ");
+        if (isLeaf(root)) {
+            System.out.print(root.value+", ");
+        }
         printLeaves(root.leftChild);
         printLeaves(root.rightChild);
     }
+
+    // task -3 print leaves of a BST
+    public int myCountLeavesSecond(Node root){
+        if (root==null) return 0;
+        if (isLeaf(root)) return 1;
+        return myCountLeavesSecond(root.leftChild) + myCountLeavesSecond(root.rightChild);
+    }
+    //sum of leaves with recursive
+    public int mySumLeavesSecond(Node root){
+        if (root==null) return 0;
+        if (!isLeaf(root)) return root.value;
+        return mySumLeavesSecond(root.leftChild) + mySumLeavesSecond(root.rightChild);
+    }
+
+    //sum of leaves with recursive
+    public int myHeightOfNode(Node root){
+        if (root==null) return -1;
+        if (isLeaf(root)) return 0;
+
+        return 1+ Math.max(myHeightOfNode(root.leftChild),myHeightOfNode(root.rightChild));
+    }
+
+
+
+
     // task -4 count leaves of a BST
     public int countLeaves(Node root){
         if (root==null) return 0;
@@ -270,11 +292,38 @@ public class MyTree {
         return 1+ Math.max(heightOfRoot(root.leftChild), heightOfRoot(root.rightChild));
     }
 
-    public int heightOfNode(int value){
-        
-        if (root==null) return -1;
-        if (isLeaf(root)) return 0;
-        return 1+ Math.max(heightOfRoot(root.leftChild), heightOfRoot(root.rightChild));
+    //first find node of value than find it´s height
+    public int heightOfNode(Node root,int value){
+        return heightOfRoot(find(root,value));
     }
 
+    // find the Node with value
+    public Node find(Node root, int value){
+        Node result = null;
+        if (root==null) return result;
+        Node current=root;
+        while(current!=null){
+            if (value < current.value) {
+                current = current.leftChild;
+            } else if (value> current.value) {
+                current = current.rightChild;
+            } else {
+                result = current;
+                break;
+            }
+        }
+        return result;
+    }
+
+    //find the node of root and then its depth
+    public int depthOfNode(Node root, int value){
+        return depthOfRoot(find(root,value),0);
+    }
+
+    //find depth of Root
+    public int depthOfRoot(Node root, int sum){
+        if(root==null) return sum = 0;
+
+        return sum + depthOfRoot(root.leftChild,sum+1) + depthOfRoot(root.rightChild,sum +1);
+    }
 }
