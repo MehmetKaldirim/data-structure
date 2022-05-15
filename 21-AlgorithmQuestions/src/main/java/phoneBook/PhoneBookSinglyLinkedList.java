@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 @Data
 @NoArgsConstructor
-public class MySinglyLinkedList<T> implements PhoneBookAbs<PhoneBook> {
+public class PhoneBookSinglyLinkedList<T> implements PhoneBookAbs<PhoneBook> {
     Node head;
     Node tail;
     int size;
@@ -64,7 +64,7 @@ public class MySinglyLinkedList<T> implements PhoneBookAbs<PhoneBook> {
         return list;
     }
 
-    @Override
+
     public Node<PhoneBook> findByName(String name) {
         Node<PhoneBook> current = head;
         PhoneBook phone;
@@ -72,6 +72,7 @@ public class MySinglyLinkedList<T> implements PhoneBookAbs<PhoneBook> {
             if (current.value.getName().equals(name)) {
                 return current;
             }
+            current=current.next;
         }
         return null;
     }

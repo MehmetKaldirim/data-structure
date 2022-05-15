@@ -3,14 +3,15 @@ package phoneBook;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 @Data
 @NoArgsConstructor
-public class MyDoublyLinkedList<T>  implements PhoneBookAbs<PhoneBook>{
-    Node2<PhoneBook> head;
-    Node2<PhoneBook> tail;
+public class PhoneBookDoublyLinkedList<T>  implements PhoneBookAbs<PhoneBook>{
+    Node2 head;
+    Node2 tail;
     int size;
     //if it s empty return true
     boolean isEmpty() {
@@ -57,21 +58,71 @@ public class MyDoublyLinkedList<T>  implements PhoneBookAbs<PhoneBook>{
 
     @Override
     public List<PhoneBook> findAll() {
-        return null;
+        List<PhoneBook> list = new ArrayList<>();
+        Node2<PhoneBook> current = head;
+        while (current != null) {
+            list.add(current.value);
+            current = current.next;
+        }
+
+        return list;
     }
 
-    @Override
-    public Node<PhoneBook> findByName(String objField) {
+
+    public Node2<PhoneBook> findByName(String name) {
+
+        Node2<PhoneBook> current = head;
+        while (current != null) {
+            if (current.value.getName().equals(name)) {
+                return current;
+            }
+            current = current.next;
+        }
         return null;
     }
 
     @Override
     public List<PhoneBook> findAllByLastName(String lastName) {
-        return null;
+        List<PhoneBook> list = new ArrayList<>();
+        Node2<PhoneBook> current = head;
+        while (current != null) {
+            if(current.value.getLastName().equals(lastName)){
+                list.add(current.value);
+            }
+            current = current.next;
+        }
+
+        return list;
     }
 
     @Override
-    public void deleteByName(String Name) {
+    public void deleteByName(String name) {
+        Node2<PhoneBook> current = head;
+        Node2<PhoneBook> previous = head;
+
+        if (isEmpty()) {
+            System.out.println("There is nothing to delete here");
+        }
+
+        while (current != null) {
+            if (current.value.getName() == name) {
+                if (current == head) {
+                    head = current.next;
+                    current.next = null;
+                } else if (current == tail) {
+                    tail = previous;
+                    tail.next = null;
+                } else {
+                    previous.next = current.next;
+                    current.next = null;
+
+                }
+                size--;
+                break;
+            }
+            previous = current;
+            current = current.next;
+        }
 
     }
 

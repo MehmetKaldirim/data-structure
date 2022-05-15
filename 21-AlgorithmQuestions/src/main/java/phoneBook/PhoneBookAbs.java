@@ -8,7 +8,6 @@ public interface PhoneBookAbs<T> {
   void insert(T t);
   void insertAll(Stream<T> stream);
   List<T> findAll();
-  Node<T> findByName(String objField);
   List<T> findAllByLastName(String lastName);
   void deleteByName(String Name);
   void deleteAllMatchingLastName(String lastName);

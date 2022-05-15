@@ -1,19 +1,20 @@
 package phoneBook;
 
-import java.util.LinkedList;
-
-public class MyCustomCollectionApp {
+public class PhoneBookLinkedListApp {
     PhoneBook phoneBook;
     public static void main(String[] args) {
-        MySinglyLinkedList<PhoneBook> single = new MySinglyLinkedList<>();
-        MyDoublyLinkedList<PhoneBook> doubly= new MyDoublyLinkedList() ;
+        PhoneBookSinglyLinkedList<PhoneBook> single = new PhoneBookSinglyLinkedList<>();
+        PhoneBookDoublyLinkedList<PhoneBook> doubly= new PhoneBookDoublyLinkedList() ;
         doubly.insertAll(PhoneBookData.getAll().stream());
         doubly.printAll();
         doubly.printName();
         doubly.deleteAllMatchingLastName("Eder");
         doubly.printName();
-
-        /*single.insertAll(PhoneBookData.getAll().stream());
+        System.out.println(doubly.findAll());
+        System.out.println(doubly.findByName("Carl").value.toString());
+        doubly.deleteByName("Carl");
+        doubly.printName();
+        single.insertAll(PhoneBookData.getAll().stream());
         single.printName();
         System.out.println("here is all");
         //System.out.println(single.findAll());
@@ -23,6 +24,6 @@ public class MyCustomCollectionApp {
 
         single.deleteAllMatchingLastName("Eder");
         single.printAll();
-        single.printNode(single.findByName("Carl"));*/
+        single.printNode(single.findByName("Carl"));
     }
 }
